@@ -5,9 +5,8 @@
 
 from credit_card_validator import credit_card_validator
 import random
-#import string
 import unittest
-from luhn import *
+import luhn
 
 
 class TestCase(unittest.TestCase):
@@ -37,7 +36,7 @@ def gen_credit_num(length, prefix, checks):
     if checks == 0:
         return cred_num
     else:
-        return append(cred_num)
+        return luhn.append(cred_num)
 
 
 def generate_testcases_visa(tests_to_generate=100):
