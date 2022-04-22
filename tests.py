@@ -5,8 +5,9 @@
 
 from credit_card_validator import credit_card_validator
 import random
-import string
+#import string
 import unittest
+from luhn import *
 
 
 class TestCase(unittest.TestCase):
@@ -23,39 +24,49 @@ def build_test_func(expected, test_case, func_under_test, message):
     return test
 
 
+def gen_credit_num(length, prefix, checks):
+    if checks == 0:
+        length += 1
+
+    min_val = 10 ** length
+    max_val = (min_val * 10) - 1
+
+    # Adds prefix and string of random numbers in the range
+    cred_num = prefix + str(random.randint(min_val, max_val))
+
+    if checks == 0:
+        return cred_num
+    else:
+        return append(cred_num)
+
+
 def generate_testcases_visa(tests_to_generate=100):
-    """Creates number of unit tests and """
+    """Creates 100 random unit tests for visa credit card numbers"""
+
     for i in range(tests_to_generate):
         expected = True
+
+        # List of edge case prefix
+        prefixes = [3, 4, 5]
         # List of edge case lengths
-        edge_cases = [7, 8, 9, 19, 20, 21]
-        # 50% chance of generating an edge case
-        odds = random.randint(0, 1)
+        lengths = [12, 13, 14]
 
-        if odds == 1:
-            length = random.choice(edge_cases)
-        else:
-            # Random length
-            length = random.randint(0, 30)
+        # Randomly picks prefix and length
+        prefix = random.choice(prefixes)
+        length = random.choice(lengths)
 
-        # Random number of lower case
-        low = random.randint(0, length)
-        # Random number of upper case
-        up = random.randint(0, length - low)
-        # Random number of numbers
-        dig = random.randint(0, length - low - up)
-        # Random number of symbols
-        sym = random.randint(0, length - low - up - dig)
-        # Determine final length of string
-        length = low + up + dig + sym
+        # 50% chance of generating check_sum or not
+        check_sum = random.randint(0, 1)
 
         # Set expected result based on specification
-        if length < 8 or length > 20:
+        if length < 16 or length > 16:
             expected = False
-        if low < 1 or up < 1 or dig < 1 or sym < 1:
+
+        if prefix < 4 or prefix < 4 or check_sum == 0:
             expected = False
+
         # Generate password
-        pwd = gen_pass(length, low, up, dig, sym)
+        pwd = gen_credit_num(length, str(prefix), check_sum)
 
         # Build test function
         message = 'Test case: {}, Expected: {}, Result: {}'
@@ -64,38 +75,32 @@ def generate_testcases_visa(tests_to_generate=100):
 
 
 def generate_testcases_mc(tests_to_generate=100):
-    """Creates number of unit tests and """
+    """Creates 100 random unit tests for mastercard credit card numbers"""
+
     for i in range(tests_to_generate):
         expected = True
+
+        # List of edge case prefix
+        prefixes = [50, 51, 52, 54, 55, 56, 2220, 2221, 2222, 2719, 2720, 2721]
         # List of edge case lengths
-        edge_cases = [7, 8, 9, 19, 20, 21]
-        # 50% chance of generating an edge case
-        odds = random.randint(0, 1)
+        lengths = [12, 13, 14]
 
-        if odds == 1:
-            length = random.choice(edge_cases)
-        else:
-            # Random length
-            length = random.randint(0, 30)
+        # Randomly picks prefix and length
+        prefix = random.choice(prefixes)
+        length = random.choice(lengths)
 
-        # Random number of lower case
-        low = random.randint(0, length)
-        # Random number of upper case
-        up = random.randint(0, length - low)
-        # Random number of numbers
-        dig = random.randint(0, length - low - up)
-        # Random number of symbols
-        sym = random.randint(0, length - low - up - dig)
-        # Determine final length of string
-        length = low + up + dig + sym
+        # 50% chance of generating check_sum or not
+        check_sum = random.randint(0, 1)
 
         # Set expected result based on specification
-        if length < 8 or length > 20:
+        if length < 16 or length > 16:
             expected = False
-        if low < 1 or up < 1 or dig < 1 or sym < 1:
+
+        if prefix < 4 or prefix < 4 or check_sum == 0:
             expected = False
+
         # Generate password
-        pwd = gen_pass(length, low, up, dig, sym)
+        pwd = gen_credit_num(length, str(prefix), check_sum)
 
         # Build test function
         message = 'Test case: {}, Expected: {}, Result: {}'
@@ -104,60 +109,37 @@ def generate_testcases_mc(tests_to_generate=100):
 
 
 def generate_testcases_amex(tests_to_generate=100):
-    """Creates number of unit tests and """
+    """Creates 100 random unit tests for amex credit card numbers"""
+
     for i in range(tests_to_generate):
         expected = True
+
+        # List of edge case prefix
+        prefixes = [33, 34, 35, 36, 37, 38]
         # List of edge case lengths
-        edge_cases = [7, 8, 9, 19, 20, 21]
-        # 50% chance of generating an edge case
-        odds = random.randint(0, 1)
+        lengths = [11, 12, 13]
 
-        if odds == 1:
-            length = random.choice(edge_cases)
-        else:
-            # Random length
-            length = random.randint(0, 30)
+        # Randomly picks prefix and length
+        prefix = random.choice(prefixes)
+        length = random.choice(lengths)
 
-        # Random number of lower case
-        low = random.randint(0, length)
-        # Random number of upper case
-        up = random.randint(0, length - low)
-        # Random number of numbers
-        dig = random.randint(0, length - low - up)
-        # Random number of symbols
-        sym = random.randint(0, length - low - up - dig)
-        # Determine final length of string
-        length = low + up + dig + sym
+        # 50% chance of generating check_sum or not
+        check_sum = random.randint(0, 1)
 
         # Set expected result based on specification
-        if length < 8 or length > 20:
+        if length < 16 or length > 16:
             expected = False
-        if low < 1 or up < 1 or dig < 1 or sym < 1:
+
+        if prefix < 4 or prefix < 4 or check_sum == 0:
             expected = False
+
         # Generate password
-        pwd = gen_pass(length, low, up, dig, sym)
+        pwd = gen_credit_num(length, str(prefix), check_sum)
 
         # Build test function
         message = 'Test case: {}, Expected: {}, Result: {}'
         new_test = build_test_func(expected, pwd, credit_card_validator, message)
         setattr(TestCase, 'test_{}'.format(pwd), new_test)
-
-
-def gen_pass(length=8, low=1, up=1, dig=1, sym=1):
-    lower_case = string.ascii_lowercase
-    upper_case = string.ascii_uppercase
-    digits = string.digits
-    symbols = '~`!@#$%^&*()_+-='
-    all_pos = lower_case + upper_case + digits + symbols
-
-    pwd = ''
-    pwd = pwd + ''.join(random.choice(lower_case) for i in range(low))
-    pwd = pwd + ''.join(random.choice(upper_case) for i in range(up))
-    pwd = pwd + ''.join(random.choice(digits) for i in range(dig))
-    pwd = pwd + ''.join(random.choice(symbols) for i in range(sym))
-    pwd = pwd + ''.join(random.choice(all_pos) for i in range(length - len(pwd)))
-
-    return ''.join(random.sample(pwd, len(pwd)))
 
 
 if __name__ == '__main__':
