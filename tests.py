@@ -39,11 +39,11 @@ def gen_credit_num(length, prefix, checks):
         return luhn.append(cred_num)
 
 
-def generate_testcases_visa(tests_to_generate=100):
+def generate_testcases(tests_to_generate=100):
     """Creates 100 random unit tests for visa credit card numbers"""
 
     for i in range(tests_to_generate):
-        expected = True
+        expected = False
 
         # List of edge case prefix
         prefixes = [3, 4, 5, 50, 51, 52, 54, 55, 56, 2220, 2221, 2222, 2719, 2720, 2721, 33, 34, 35, 36, 37, 38]
@@ -57,14 +57,19 @@ def generate_testcases_visa(tests_to_generate=100):
         # 50% chance of generating check_sum or not
         check_sum = random.randint(0, 1)
 
-        # Set expected result based on specification
-        if length < 16 or length > 16:
-            expected = False
+        # Set expected result based on specification for Visa
+        if prefix == 4 and length == 13 and check_sum == 1:
+            expected = True
+            
+        # Set expected result based on specification for MC
+        if (51 >= prefix >= 55 or 2221 >= prefix >= 2720) and length == 13 and check_sum == 1:
+            expected = True
+            
+        # Set expected result based on specification for Amex
+        if (prefix == 34 or prefix == 37) and length == 12 and check_sum == 1:
+            expected = True
 
-        if prefix < 4 or prefix < 4 or check_sum == 0:
-            expected = False
-
-        # Generate password
+        # Generate credit card number
         pwd = gen_credit_num(length, str(prefix), check_sum)
 
         # Build test function
