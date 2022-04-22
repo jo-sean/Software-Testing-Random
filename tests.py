@@ -6,7 +6,7 @@
 from credit_card_validator import credit_card_validator
 import random
 import unittest
-import luhn
+import not_mine
 
 
 class TestCase(unittest.TestCase):
@@ -36,7 +36,7 @@ def gen_credit_num(length, prefix, checks):
     if checks == 0:
         return cred_num
     else:
-        return luhn.append(cred_num)
+        return not_mine.append(cred_num)
 
 
 def generate_testcases(tests_to_generate=100):
@@ -60,11 +60,11 @@ def generate_testcases(tests_to_generate=100):
         # Set expected result based on specification for Visa
         if prefix == 4 and length == 13 and check_sum == 1:
             expected = True
-            
+
         # Set expected result based on specification for MC
         if (51 >= prefix >= 55 or 2221 >= prefix >= 2720) and length == 13 and check_sum == 1:
             expected = True
-            
+
         # Set expected result based on specification for Amex
         if (prefix == 34 or prefix == 37) and length == 12 and check_sum == 1:
             expected = True
