@@ -24,31 +24,34 @@ def build_test_func(expected, test_case, func_under_test, message):
 
 
 def gen_credit_num(length, prefix, checks):
+    # If not doing check, increments length to account for lack of new digit
     if checks == 0:
         length += 1
 
+    # Create a range of values
     min_val = 10 ** length
     max_val = (min_val * 10) - 1
 
     # Adds prefix and string of random numbers in the range
     cred_num = prefix + str(random.randint(min_val, max_val))
 
+    # If no check, just returns num. If check, returns appended checksum value
     if checks == 0:
         return cred_num
     else:
         return not_mine.append(cred_num)
 
 
-def generate_testcases(tests_to_generate=100):
+def generate_testcases_visa(tests_to_generate=100):
     """Creates 100 random unit tests for visa credit card numbers"""
 
     for i in range(tests_to_generate):
         expected = False
 
         # List of edge case prefix
-        prefixes = [3, 4, 5, 50, 51, 52, 54, 55, 56, 2220, 2221, 2222, 2719, 2720, 2721, 33, 34, 35, 36, 37, 38]
+        prefixes = [3, 4, 5]
         # List of edge case lengths
-        lengths = [11, 12, 13, 14]
+        lengths = [12, 13, 14]
 
         # Randomly picks prefix and length
         prefix = random.choice(prefixes)
@@ -61,14 +64,6 @@ def generate_testcases(tests_to_generate=100):
         if prefix == 4 and length == 13 and check_sum == 1:
             expected = True
 
-        # Set expected result based on specification for MC
-        if (51 >= prefix >= 55 or 2221 >= prefix >= 2720) and length == 13 and check_sum == 1:
-            expected = True
-
-        # Set expected result based on specification for Amex
-        if (prefix == 34 or prefix == 37) and length == 12 and check_sum == 1:
-            expected = True
-
         # Generate credit card number
         pwd = gen_credit_num(length, str(prefix), check_sum)
 
@@ -78,76 +73,70 @@ def generate_testcases(tests_to_generate=100):
         setattr(TestCase, 'test_{}'.format(pwd), new_test)
 
 
-# def generate_testcases_mc(tests_to_generate=100):
-#     """Creates 100 random unit tests for mastercard credit card numbers"""
-#
-#     for i in range(tests_to_generate):
-#         expected = True
-#
-#         # List of edge case prefix
-#         prefixes = [50, 51, 52, 54, 55, 56, 2220, 2221, 2222, 2719, 2720, 2721]
-#         # List of edge case lengths
-#         lengths = [12, 13, 14]
-#
-#         # Randomly picks prefix and length
-#         prefix = random.choice(prefixes)
-#         length = random.choice(lengths)
-#
-#         # 50% chance of generating check_sum or not
-#         check_sum = random.randint(0, 1)
-#
-#         # Set expected result based on specification
-#         if length < 16 or length > 16:
-#             expected = False
-#
-#         if prefix < 4 or prefix < 4 or check_sum == 0:
-#             expected = False
-#
-#         # Generate password
-#         pwd = gen_credit_num(length, str(prefix), check_sum)
-#
-#         # Build test function
-#         message = 'Test case: {}, Expected: {}, Result: {}'
-#         new_test = build_test_func(expected, pwd, credit_card_validator, message)
-#         setattr(TestCase, 'test_{}'.format(pwd), new_test)
-#
-#
-# def generate_testcases_amex(tests_to_generate=100):
-#     """Creates 100 random unit tests for amex credit card numbers"""
-#
-#     for i in range(tests_to_generate):
-#         expected = True
-#
-#         # List of edge case prefix
-#         prefixes = [33, 34, 35, 36, 37, 38]
-#         # List of edge case lengths
-#         lengths = [11, 12, 13]
-#
-#         # Randomly picks prefix and length
-#         prefix = random.choice(prefixes)
-#         length = random.choice(lengths)
-#
-#         # 50% chance of generating check_sum or not
-#         check_sum = random.randint(0, 1)
-#
-#         # Set expected result based on specification
-#         if length < 16 or length > 16:
-#             expected = False
-#
-#         if prefix < 4 or prefix < 4 or check_sum == 0:
-#             expected = False
-#
-#         # Generate password
-#         pwd = gen_credit_num(length, str(prefix), check_sum)
-#
-#         # Build test function
-#         message = 'Test case: {}, Expected: {}, Result: {}'
-#         new_test = build_test_func(expected, pwd, credit_card_validator, message)
-#         setattr(TestCase, 'test_{}'.format(pwd), new_test)
+def generate_testcases_mc(tests_to_generate=100):
+    """Creates 100 random unit tests for mastercard credit card numbers"""
+
+    for i in range(tests_to_generate):
+        expected = True
+
+        # List of edge case prefix
+        prefixes = [50, 51, 52, 54, 55, 56, 2220, 2221, 2222, 2719, 2720, 2721]
+        # List of edge case lengths
+        lengths = [12, 13, 14]
+
+        # Randomly picks prefix and length
+        prefix = random.choice(prefixes)
+        length = random.choice(lengths)
+
+        # 50% chance of generating check_sum or not
+        check_sum = random.randint(0, 1)
+
+        # Set expected result based on specification for MC
+        if (51 >= prefix >= 55 or 2221 >= prefix >= 2720) and length == 13 and check_sum == 1:
+            expected = True
+
+        # Generate password
+        pwd = gen_credit_num(length, str(prefix), check_sum)
+
+        # Build test function
+        message = 'Test case: {}, Expected: {}, Result: {}'
+        new_test = build_test_func(expected, pwd, credit_card_validator, message)
+        setattr(TestCase, 'test_{}'.format(pwd), new_test)
+
+
+def generate_testcases_amex(tests_to_generate=100):
+    """Creates 100 random unit tests for amex credit card numbers"""
+
+    for i in range(tests_to_generate):
+        expected = True
+
+        # List of edge case prefix
+        prefixes = [33, 34, 35, 36, 37, 38]
+        # List of edge case lengths
+        lengths = [11, 12, 13]
+
+        # Randomly picks prefix and length
+        prefix = random.choice(prefixes)
+        length = random.choice(lengths)
+
+        # 50% chance of generating check_sum or not
+        check_sum = random.randint(0, 1)
+
+        # Set expected result based on specification for Amex
+        if (prefix == 34 or prefix == 37) and length == 12 and check_sum == 1:
+            expected = True
+
+        # Generate password
+        pwd = gen_credit_num(length, str(prefix), check_sum)
+
+        # Build test function
+        message = 'Test case: {}, Expected: {}, Result: {}'
+        new_test = build_test_func(expected, pwd, credit_card_validator, message)
+        setattr(TestCase, 'test_{}'.format(pwd), new_test)
 
 
 if __name__ == '__main__':
     generate_testcases_visa()
-    # generate_testcases_mc()
-    # generate_testcases_amex()
+    generate_testcases_mc()
+    generate_testcases_amex()
     unittest.main(verbosity=2)
