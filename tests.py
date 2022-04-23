@@ -120,7 +120,7 @@ def generate_testcases_visa(tests_to_generate=1000):
         expected = False
 
         # List of edge case prefix
-        prefixes = [3, 4, 5]
+        prefixes = [4]
         # List of edge case lengths
         lengths = [13, 14, 15]
 
@@ -132,7 +132,7 @@ def generate_testcases_visa(tests_to_generate=1000):
         check_sum = random.randint(0, 1)
 
         # Set expected result based on specification for Visa
-        if prefix == 4 and length == 13 and check_sum == 1:
+        if length == 14 and check_sum == 1:
             expected = True
 
         # Generate credit card number
