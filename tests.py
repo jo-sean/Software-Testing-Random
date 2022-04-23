@@ -104,7 +104,7 @@ class TestCase(unittest.TestCase):
 #         return append(prefix_num)
 
 
-def generate_testcases_visa(tests_to_generate=300000):
+def generate_testcases_visa(tests_to_generate=500000):
     """Creates 100000 random unit tests for visa credit card numbers"""
 
     for i in range(tests_to_generate):
