@@ -113,7 +113,7 @@ def generate_testcases_visa(tests_to_generate=1000000):
         odds = random.randint(1, 3)
 
         if odds == 1:
-            prefix = 4
+            prefix = '4'
             lengths = [13, 14, 15]
 
         else:
