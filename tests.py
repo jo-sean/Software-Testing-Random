@@ -6,6 +6,7 @@
 from credit_card_validator import credit_card_validator
 import random
 import unittest
+import string
 
 
 class TestCase(unittest.TestCase):
@@ -25,11 +26,9 @@ def generate_testcases_visa(tests_to_generate=200000):
 
         # Randomly picks length
         length = random.choice(lengths)
+        digits = string.digits
 
-        min_val = (40 ** length)
-        max_val = (min_val * 10) - 1
-
-        prefix_num = prefix + str(random.randint(min_val, max_val))
+        prefix_num = prefix + ''.join(random.choice(digits) for i in range(length))
 
         credit_card_validator(prefix_num)
 
@@ -47,11 +46,9 @@ def generate_testcases_mc_1(tests_to_generate=200000):
         # Randomly picks prefix and length
         prefix = str(random.choice(prefixes))
         length = random.choice(lengths)
+        digits = string.digits
 
-        min_val = (int(prefix) ** length)
-        max_val = (min_val * 10) - 1
-
-        prefix_num = prefix + str(random.randint(min_val, max_val))
+        prefix_num = prefix + ''.join(random.choice(digits) for i in range(length))
 
         credit_card_validator(prefix_num)
 
@@ -69,11 +66,9 @@ def generate_testcases_mc_2(tests_to_generate=200000):
         # Randomly picks prefix and length
         prefix = str(random.choice(prefixes))
         length = random.choice(lengths)
+        digits = string.digits
 
-        min_val = (int(prefix) ** length)
-        max_val = (min_val * 10) - 1
-
-        prefix_num = prefix + str(random.randint(min_val, max_val))
+        prefix_num = prefix + ''.join(random.choice(digits) for i in range(length))
 
         credit_card_validator(prefix_num)
 
@@ -91,11 +86,9 @@ def generate_testcases_amex(tests_to_generate=200000):
         # Randomly picks prefix and length
         prefix = str(random.choice(prefixes))
         length = random.choice(lengths)
+        digits = string.digits
 
-        min_val = (int(prefix) ** length)
-        max_val = (min_val * 10) - 1
-
-        prefix_num = prefix + str(random.randint(min_val, max_val))
+        prefix_num = prefix + ''.join(random.choice(digits) for i in range(length))
 
         credit_card_validator(prefix_num)
 
