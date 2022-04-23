@@ -89,10 +89,10 @@ def build_test_func(expected, test_case, func_under_test, message):
 
     func_under_test(test_case)
 
-    def test(self):
-        #result = func_under_test(test_case)
-        #self.assertEqual(expected, result, message.format(test_case, expected, result))
-    #return test
+    # def test(self):
+    # result = func_under_test(test_case)
+    # self.assertEqual(expected, result, message.format(test_case, expected, result))
+    # return test
 
 
 def gen_credit_num(length, prefix, check_sum):
@@ -141,8 +141,9 @@ def generate_testcases_visa(tests_to_generate=50000):
 
         # Build test function
         message = 'Test case: {}, Expected: {}, Result: {}'
-        new_test = build_test_func(expected, pwd, credit_card_validator, message)
-        setattr(TestCase, 'test_{}'.format(pwd), new_test)
+        build_test_func(expected, pwd, credit_card_validator, message)
+        # new_test = build_test_func(expected, pwd, credit_card_validator, message)
+        # setattr(TestCase, 'test_{}'.format(pwd), new_test)
 
 
 def generate_testcases_mc_1(tests_to_generate=50000):
@@ -172,8 +173,9 @@ def generate_testcases_mc_1(tests_to_generate=50000):
 
         # Build test function
         message = 'Test case: {}, Expected: {}, Result: {}'
-        new_test = build_test_func(expected, pwd, credit_card_validator, message)
-        setattr(TestCase, 'test_{}'.format(pwd), new_test)
+        build_test_func(expected, pwd, credit_card_validator, message)
+        # new_test = build_test_func(expected, pwd, credit_card_validator, message)
+        # setattr(TestCase, 'test_{}'.format(pwd), new_test)
 
 
 def generate_testcases_mc_2(tests_to_generate=50000):
@@ -203,8 +205,9 @@ def generate_testcases_mc_2(tests_to_generate=50000):
 
         # Build test function
         message = 'Test case: {}, Expected: {}, Result: {}'
-        new_test = build_test_func(expected, pwd, credit_card_validator, message)
-        setattr(TestCase, 'test_{}'.format(pwd), new_test)
+        build_test_func(expected, pwd, credit_card_validator, message)
+        # new_test = build_test_func(expected, pwd, credit_card_validator, message)
+        # setattr(TestCase, 'test_{}'.format(pwd), new_test)
 
 
 def generate_testcases_amex(tests_to_generate=50000):
@@ -234,8 +237,9 @@ def generate_testcases_amex(tests_to_generate=50000):
 
         # Build test function
         message = 'Test case: {}, Expected: {}, Result: {}'
-        new_test = build_test_func(expected, pwd, credit_card_validator, message)
-        setattr(TestCase, 'test_{}'.format(pwd), new_test)
+        build_test_func(expected, pwd, credit_card_validator, message)
+        # new_test = build_test_func(expected, pwd, credit_card_validator, message)
+        # setattr(TestCase, 'test_{}'.format(pwd), new_test)
 
 
 if __name__ == '__main__':
