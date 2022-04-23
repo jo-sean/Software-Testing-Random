@@ -84,24 +84,24 @@ class TestCase(unittest.TestCase):
     pass
 
 
-def gen_credit_num(length, prefix, check_sum):
-    # If not doing check, increments length to account for lack of new digit
-    if check_sum == 0:
-        if length > 0:
-            length += 1
-
-    # Create a range of values
-    min_val = (10 ** length)
-    max_val = (min_val * 10) - 1
-
-    # Adds prefix and string of random numbers in the range
-    prefix_num = prefix + str(random.randint(min_val, max_val))
-
-    # If no check, just returns num. If check, returns appended checksum value
-    if check_sum == 0:
-        return prefix_num
-    else:
-        return append(prefix_num)
+# def gen_credit_num(length, prefix, check_sum):
+#     # If not doing check, increments length to account for lack of new digit
+#     if check_sum == 0:
+#         if length > 0:
+#             length += 1
+#
+#     # Create a range of values
+#     min_val = (10 ** length)
+#     max_val = (min_val * 10) - 1
+#
+#     # Adds prefix and string of random numbers in the range
+#     prefix_num = prefix + str(random.randint(min_val, max_val))
+#
+#     # If no check, just returns num. If check, returns appended checksum value
+#     if check_sum == 0:
+#         return prefix_num
+#     else:
+#         return append(prefix_num)
 
 
 def generate_testcases_visa(tests_to_generate=300000):
@@ -110,8 +110,12 @@ def generate_testcases_visa(tests_to_generate=300000):
     for i in range(tests_to_generate):
 
         # List of edge case prefix
-        prefixes = [50, 51, 52, 54, 55, 56, 2220, 2221, 2222, 2719, 2720, 2721, 33, 34, 35, 36, 37, 38, 39]
+        prefixes = [4, 50, 51, 52, 54, 55, 56, 2220, 2221, 2222, 2719, 2720, 2721, 33, 34, 35, 36, 37, 38, 39]
+
+        # Randomly picks prefix
         prefix = random.choice(prefixes)
+
+        # lengths = [10, 11, 12, 13, 14, 15]
 
         # List of edge case lengths
         if len(prefix) == 1:
@@ -124,16 +128,21 @@ def generate_testcases_visa(tests_to_generate=300000):
         else:
             lengths = [10, 11, 12]
 
-        # Randomly picks prefix and length
+        # Randomly picks length
         length = random.choice(lengths)
 
+        min_val = (10 ** length)
+        max_val = (min_val * 10) - 1
+
         # 50% chance of generating check_sum or not
-        check_sum = random.randint(0, 1)
+        # check_sum = random.randint(0, 1)
 
         # Generate credit card number
-        pwd = gen_credit_num(length, str(prefix), check_sum)
+        # pwd = gen_credit_num(length, str(prefix), check_sum)
 
-        credit_card_validator(pwd)
+        prefix_num = str(prefix) + str(random.randint(min_val, max_val))
+
+        credit_card_validator(prefix_num)
 
 
 # def generate_testcases_mc_1(tests_to_generate=100000):
