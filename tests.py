@@ -113,7 +113,7 @@ def gen_credit_num(length, prefix, checks, range=None):
         return append(cred_num)
 
 
-def generate_testcases_visa(tests_to_generate=133333):
+def generate_testcases_visa(tests_to_generate=1000):
     """Creates 100 random unit tests for visa credit card numbers"""
 
     for i in range(tests_to_generate):
@@ -144,7 +144,7 @@ def generate_testcases_visa(tests_to_generate=133333):
         setattr(TestCase, 'test_{}'.format(pwd), new_test)
 
 
-def generate_testcases_mc(tests_to_generate=133333):
+def generate_testcases_mc(tests_to_generate=1000):
     """Creates 100 random unit tests for mastercard credit card numbers"""
 
     for i in range(tests_to_generate):
@@ -175,7 +175,7 @@ def generate_testcases_mc(tests_to_generate=133333):
         setattr(TestCase, 'test_{}'.format(pwd), new_test)
 
 
-def generate_testcases_amex(tests_to_generate=133333):
+def generate_testcases_amex(tests_to_generate=1000):
     """Creates 100 random unit tests for amex credit card numbers"""
 
     for i in range(tests_to_generate):
