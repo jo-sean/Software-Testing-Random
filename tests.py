@@ -239,6 +239,7 @@ def generate_testcases_amex(tests_to_generate=1000):
 
 if __name__ == '__main__':
     generate_testcases_visa()
-    generate_testcases_mc()
+    generate_testcases_mc_1()
+    generate_testcases_mc_2()
     generate_testcases_amex()
     unittest.main(verbosity=2)
