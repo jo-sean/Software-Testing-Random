@@ -93,10 +93,11 @@ def build_test_func(expected, test_case, func_under_test, message):
     return test
 
 
-def gen_credit_num(length, prefix, checks):
+def gen_credit_num(length, prefix, checks, range=None):
     # If not doing check, increments length to account for lack of new digit
     if checks == 0:
-        length += 1
+        if length > 0:
+            length += 1
 
     # Create a range of values
     min_val = 10 ** length
@@ -112,7 +113,7 @@ def gen_credit_num(length, prefix, checks):
         return append(cred_num)
 
 
-def generate_testcases_visa(tests_to_generate=100):
+def generate_testcases_visa(tests_to_generate=133333):
     """Creates 100 random unit tests for visa credit card numbers"""
 
     for i in range(tests_to_generate):
@@ -121,7 +122,7 @@ def generate_testcases_visa(tests_to_generate=100):
         # List of edge case prefix
         prefixes = [3, 4, 5]
         # List of edge case lengths
-        lengths = [12, 13, 14]
+        lengths = [0, 12, 13, 14]
 
         # Randomly picks prefix and length
         prefix = random.choice(prefixes)
@@ -143,7 +144,7 @@ def generate_testcases_visa(tests_to_generate=100):
         setattr(TestCase, 'test_{}'.format(pwd), new_test)
 
 
-def generate_testcases_mc(tests_to_generate=100):
+def generate_testcases_mc(tests_to_generate=133333):
     """Creates 100 random unit tests for mastercard credit card numbers"""
 
     for i in range(tests_to_generate):
@@ -174,7 +175,7 @@ def generate_testcases_mc(tests_to_generate=100):
         setattr(TestCase, 'test_{}'.format(pwd), new_test)
 
 
-def generate_testcases_amex(tests_to_generate=100):
+def generate_testcases_amex(tests_to_generate=133333):
     """Creates 100 random unit tests for amex credit card numbers"""
 
     for i in range(tests_to_generate):
