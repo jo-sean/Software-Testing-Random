@@ -6,9 +6,10 @@
 from credit_card_validator import credit_card_validator
 import random
 import unittest
-import not_mine
 
 
+########################################################################
+# Contents below are from Michael McLoughlin's Luhn Module
 ########################################################################
 # The MIT License (MIT)
 #
@@ -73,7 +74,8 @@ def append(string):
     '534618613411234'
     """
     return string + str(generate(string))
-
+########################################################################
+# Contents above are from Michael McLoughlin's Luhn Module
 ########################################################################
 
 
@@ -107,7 +109,7 @@ def gen_credit_num(length, prefix, checks):
     if checks == 0:
         return cred_num
     else:
-        return not_mine.append(cred_num)
+        return append(cred_num)
 
 
 def generate_testcases_visa(tests_to_generate=100):
