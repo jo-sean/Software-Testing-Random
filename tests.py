@@ -113,7 +113,7 @@ def generate_testcases_visa(tests_to_generate=300000):
         prefixes = [4, 50, 51, 52, 54, 55, 56, 2220, 2221, 2222, 2719, 2720, 2721, 33, 34, 35, 36, 37, 38, 39]
 
         # Randomly picks prefix
-        prefix = random.choice(prefixes)
+        prefix = str(random.choice(prefixes))
 
         # lengths = [10, 11, 12, 13, 14, 15]
 
@@ -121,7 +121,7 @@ def generate_testcases_visa(tests_to_generate=300000):
         if len(prefix) == 1:
             lengths = [13, 14, 15]
         elif len(prefix) == 2:
-            if 50 < prefix < 56:
+            if 50 < int(prefix) < 56:
                 lengths = [12, 13, 14]
             else:
                 lengths = [11, 12, 13]
@@ -140,7 +140,7 @@ def generate_testcases_visa(tests_to_generate=300000):
         # Generate credit card number
         # pwd = gen_credit_num(length, str(prefix), check_sum)
 
-        prefix_num = str(prefix) + str(random.randint(min_val, max_val))
+        prefix_num = prefix + str(random.randint(min_val, max_val))
 
         credit_card_validator(prefix_num)
 
