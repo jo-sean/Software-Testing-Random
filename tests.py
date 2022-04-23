@@ -144,14 +144,14 @@ def generate_testcases_visa(tests_to_generate=1000):
         setattr(TestCase, 'test_{}'.format(pwd), new_test)
 
 
-def generate_testcases_mc(tests_to_generate=1000):
+def generate_testcases_mc_1(tests_to_generate=1000):
     """Creates 100 random unit tests for mastercard credit card numbers"""
 
     for i in range(tests_to_generate):
         expected = True
 
         # List of edge case prefix
-        prefixes = [50, 51, 52, 54, 55, 56, 2220, 2221, 2222, 2719, 2720, 2721]
+        prefixes = [2220, 2221, 2222, 2719, 2720, 2721]
         # List of edge case lengths
         lengths = [12, 13, 14]
 
@@ -163,10 +163,39 @@ def generate_testcases_mc(tests_to_generate=1000):
         check_sum = random.randint(0, 1)
 
         # Set expected result based on specification for MC
-        if (51 >= prefix >= 55 or 2221 >= prefix >= 2720) and length == 13 and check_sum == 1:
+        if 51 >= prefix >= 55 and length == 13 and check_sum == 1:
             expected = True
-            if len(prefix) == 4:
-                length = length - 2
+
+        # Generate password
+        pwd = gen_credit_num(length, str(prefix), check_sum)
+
+        # Build test function
+        message = 'Test case: {}, Expected: {}, Result: {}'
+        new_test = build_test_func(expected, pwd, credit_card_validator, message)
+        setattr(TestCase, 'test_{}'.format(pwd), new_test)
+
+
+def generate_testcases_mc_2(tests_to_generate=1000):
+    """Creates 100 random unit tests for mastercard credit card numbers"""
+
+    for i in range(tests_to_generate):
+        expected = True
+
+        # List of edge case prefix
+        prefixes = [2220, 2221, 2222, 2719, 2720, 2721]
+        # List of edge case lengths
+        lengths = [10, 11, 12]
+
+        # Randomly picks prefix and length
+        prefix = random.choice(prefixes)
+        length = random.choice(lengths)
+
+        # 50% chance of generating check_sum or not
+        check_sum = random.randint(0, 1)
+
+        # Set expected result based on specification for MC
+        if 2221 >= prefix >= 2720 and length == 11 and check_sum == 1:
+            expected = True
 
         # Generate password
         pwd = gen_credit_num(length, str(prefix), check_sum)
