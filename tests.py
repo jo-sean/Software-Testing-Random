@@ -166,10 +166,6 @@ def generate_testcases_mc_2(tests_to_generate=100000000):
         # 50% chance of generating check_sum or not
         check_sum = random.randint(0, 1)
 
-        # Set expected result based on specification for MC
-        if 2221 >= prefix >= 2720 and length == 11 and check_sum == 1:
-            expected = True
-
         # Generate password
         pwd = gen_credit_num(length, str(prefix), check_sum)
 
@@ -192,10 +188,6 @@ def generate_testcases_amex(tests_to_generate=100000000):
 
         # 50% chance of generating check_sum or not
         check_sum = random.randint(0, 1)
-
-        # Set expected result based on specification for Amex
-        if (prefix == 34 or prefix == 37) and length == 12 and check_sum == 1:
-            expected = True
 
         # Generate password
         pwd = gen_credit_num(length, str(prefix), check_sum)
