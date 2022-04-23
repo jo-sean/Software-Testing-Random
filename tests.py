@@ -104,21 +104,25 @@ def gen_credit_num(length, prefix, check_sum):
         return append(prefix_num)
 
 
-def generate_testcases_visa(tests_to_generate=100000):
+def generate_testcases_visa(tests_to_generate=300000):
     """Creates 100000 random unit tests for visa credit card numbers"""
 
     for i in range(tests_to_generate):
 
         # List of edge case prefix
-        prefix = 4
-        # List of edge case lengths
-        lengths = [13, 14, 15]
+        prefixes = [50, 51, 52, 54, 55, 56, 2220, 2221, 2222, 2719, 2720, 2721, 33, 34, 35, 36, 37, 38, 39]
+        prefix = random.choice(prefixes)
 
-        # if len(lengths) == 1:
-        #     pass
-        # elif len(lengths) == 2:
-        #     pass
-        # else:
+        # List of edge case lengths
+        if len(prefix) == 1:
+            lengths = [13, 14, 15]
+        elif len(prefix) == 2:
+            if 50 < prefix < 56:
+                lengths = [12, 13, 14]
+            else:
+                lengths = [11, 12, 13]
+        else:
+            lengths = [10, 11, 12]
 
         # Randomly picks prefix and length
         length = random.choice(lengths)
@@ -132,78 +136,78 @@ def generate_testcases_visa(tests_to_generate=100000):
         credit_card_validator(pwd)
 
 
-def generate_testcases_mc_1(tests_to_generate=100000):
-    """Creates 100000 random unit tests for mastercard credit card numbers"""
-
-    for i in range(tests_to_generate):
-
-        # List of edge case prefix
-        prefixes = [50, 51, 52, 54, 55, 56]
-        # List of edge case lengths
-        lengths = [12, 13, 14]
-
-        # Randomly picks prefix and length
-        prefix = random.choice(prefixes)
-        length = random.choice(lengths)
-
-        # 50% chance of generating check_sum or not
-        check_sum = random.randint(0, 1)
-
-        # Generate password
-        pwd = gen_credit_num(length, str(prefix), check_sum)
-
-        credit_card_validator(pwd)
-
-
-def generate_testcases_mc_2(tests_to_generate=100000):
-    """Creates 100000 random unit tests for mastercard credit card numbers"""
-
-    for i in range(tests_to_generate):
-
-        # List of edge case prefix
-        prefixes = [2220, 2221, 2222, 2719, 2720, 2721]
-        # List of edge case lengths
-        lengths = [10, 11, 12]
-
-        # Randomly picks prefix and length
-        prefix = random.choice(prefixes)
-        length = random.choice(lengths)
-
-        # 50% chance of generating check_sum or not
-        check_sum = random.randint(0, 1)
-
-        # Generate password
-        pwd = gen_credit_num(length, str(prefix), check_sum)
-
-        credit_card_validator(pwd)
-
-
-def generate_testcases_amex(tests_to_generate=100000):
-    """Creates 100000 random unit tests for amex credit card numbers"""
-
-    for i in range(tests_to_generate):
-
-        # List of edge case prefix
-        prefixes = [33, 34, 35, 36, 37, 38, 39]
-        # List of edge case lengths
-        lengths = [11, 12, 13]
-
-        # Randomly picks prefix and length
-        prefix = random.choice(prefixes)
-        length = random.choice(lengths)
-
-        # 50% chance of generating check_sum or not
-        check_sum = random.randint(0, 1)
-
-        # Generate password
-        pwd = gen_credit_num(length, str(prefix), check_sum)
-
-        credit_card_validator(pwd)
+# def generate_testcases_mc_1(tests_to_generate=100000):
+#     """Creates 100000 random unit tests for mastercard credit card numbers"""
+#
+#     for i in range(tests_to_generate):
+#
+#         # List of edge case prefix
+#         prefixes = [50, 51, 52, 54, 55, 56]
+#         # List of edge case lengths
+#         lengths = [12, 13, 14]
+#
+#         # Randomly picks prefix and length
+#         prefix = random.choice(prefixes)
+#         length = random.choice(lengths)
+#
+#         # 50% chance of generating check_sum or not
+#         check_sum = random.randint(0, 1)
+#
+#         # Generate password
+#         pwd = gen_credit_num(length, str(prefix), check_sum)
+#
+#         credit_card_validator(pwd)
+#
+#
+# def generate_testcases_mc_2(tests_to_generate=100000):
+#     """Creates 100000 random unit tests for mastercard credit card numbers"""
+#
+#     for i in range(tests_to_generate):
+#
+#         # List of edge case prefix
+#         prefixes = [2220, 2221, 2222, 2719, 2720, 2721]
+#         # List of edge case lengths
+#         lengths = [10, 11, 12]
+#
+#         # Randomly picks prefix and length
+#         prefix = random.choice(prefixes)
+#         length = random.choice(lengths)
+#
+#         # 50% chance of generating check_sum or not
+#         check_sum = random.randint(0, 1)
+#
+#         # Generate password
+#         pwd = gen_credit_num(length, str(prefix), check_sum)
+#
+#         credit_card_validator(pwd)
+#
+#
+# def generate_testcases_amex(tests_to_generate=100000):
+#     """Creates 100000 random unit tests for amex credit card numbers"""
+#
+#     for i in range(tests_to_generate):
+#
+#         # List of edge case prefix
+#         prefixes = [33, 34, 35, 36, 37, 38, 39]
+#         # List of edge case lengths
+#         lengths = [11, 12, 13]
+#
+#         # Randomly picks prefix and length
+#         prefix = random.choice(prefixes)
+#         length = random.choice(lengths)
+#
+#         # 50% chance of generating check_sum or not
+#         check_sum = random.randint(0, 1)
+#
+#         # Generate password
+#         pwd = gen_credit_num(length, str(prefix), check_sum)
+#
+#         credit_card_validator(pwd)
 
 
 if __name__ == '__main__':
     generate_testcases_visa()
-    generate_testcases_mc_1()
-    generate_testcases_mc_2()
-    generate_testcases_amex()
+    # generate_testcases_mc_1()
+    # generate_testcases_mc_2()
+    # generate_testcases_amex()
     unittest.main(verbosity=2)
