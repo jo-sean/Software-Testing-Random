@@ -114,6 +114,12 @@ def generate_testcases_visa(tests_to_generate=100000):
         # List of edge case lengths
         lengths = [13, 14, 15]
 
+        # if len(lengths) == 1:
+        #     pass
+        # elif len(lengths) == 2:
+        #     pass
+        # else:
+
         # Randomly picks prefix and length
         length = random.choice(lengths)
 
@@ -132,7 +138,7 @@ def generate_testcases_mc_1(tests_to_generate=100000):
     for i in range(tests_to_generate):
 
         # List of edge case prefix
-        prefixes = [2220, 2221, 2222, 2719, 2720, 2721]
+        prefixes = [50, 51, 52, 54, 55, 56]
         # List of edge case lengths
         lengths = [12, 13, 14]
 
@@ -157,7 +163,7 @@ def generate_testcases_mc_2(tests_to_generate=100000):
         # List of edge case prefix
         prefixes = [2220, 2221, 2222, 2719, 2720, 2721]
         # List of edge case lengths
-        lengths = [10, 11, 12]
+        lengths = [12, 13, 14]
 
         # Randomly picks prefix and length
         prefix = random.choice(prefixes)
@@ -178,7 +184,7 @@ def generate_testcases_amex(tests_to_generate=100000):
     for i in range(tests_to_generate):
 
         # List of edge case prefix
-        prefixes = [33, 34, 35, 36, 37, 38]
+        prefixes = [33, 34, 35, 36, 37, 38, 39]
         # List of edge case lengths
         lengths = [11, 12, 13]
 
