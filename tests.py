@@ -110,23 +110,28 @@ def generate_testcases_visa(tests_to_generate=1000000):
     for i in range(tests_to_generate):
 
         # List of edge case prefix
-        prefixes = [4, 50, 51, 52, 54, 55, 56, 2220, 2221, 2222, 2719, 2720, 2721, 33, 34, 35, 36, 37, 38, 39]
+        odds = random.randint(1, 3)
 
-        # Randomly picks prefix
-        prefix = str(random.choice(prefixes))
-
-        # lengths = [10, 11, 12, 13, 14, 15]
-
-        # List of edge case lengths
-        if len(prefix) == 1:
+        if odds == 1:
+            prefix = 4
             lengths = [13, 14, 15]
-        elif len(prefix) == 2:
-            if 50 < int(prefix) < 56:
-                lengths = [12, 13, 14]
-            else:
-                lengths = [11, 12, 13]
+
         else:
-            lengths = [10, 11, 12]
+            prefixes = [50, 51, 52, 54, 55, 56, 2220, 2221, 2222, 2719, 2720, 2721, 33, 34, 35, 36, 37, 38]
+
+            # Randomly picks prefix
+            prefix = str(random.choice(prefixes))
+
+            # List of edge case lengths
+            if len(prefix) == 1:
+                lengths = [13, 14, 15]
+            if len(prefix) == 2:
+                if 50 < int(prefix) < 56:
+                    lengths = [12, 13, 14]
+                else:
+                    lengths = [11, 12, 13]
+            else:
+                lengths = [10, 11, 12]
 
         # Randomly picks length
         length = random.choice(lengths)
