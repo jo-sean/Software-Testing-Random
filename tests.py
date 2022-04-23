@@ -104,7 +104,7 @@ def gen_credit_num(length, prefix, check_sum):
         return append(prefix_num)
 
 
-def generate_testcases_visa(tests_to_generate=50000):
+def generate_testcases_visa(tests_to_generate=500000):
     """Creates 100 random unit tests for visa credit card numbers"""
 
     for i in range(tests_to_generate):
@@ -127,7 +127,7 @@ def generate_testcases_visa(tests_to_generate=50000):
 
 
 
-def generate_testcases_mc_1(tests_to_generate=50000):
+def generate_testcases_mc_1(tests_to_generate=500000):
     """Creates 100 random unit tests for mastercard credit card numbers"""
 
     for i in range(tests_to_generate):
@@ -150,7 +150,7 @@ def generate_testcases_mc_1(tests_to_generate=50000):
         credit_card_validator(pwd)
 
 
-def generate_testcases_mc_2(tests_to_generate=50000):
+def generate_testcases_mc_2(tests_to_generate=500000):
     """Creates 100 random unit tests for mastercard credit card numbers"""
 
     for i in range(tests_to_generate):
@@ -177,7 +177,7 @@ def generate_testcases_mc_2(tests_to_generate=50000):
         credit_card_validator(pwd)
 
 
-def generate_testcases_amex(tests_to_generate=50000):
+def generate_testcases_amex(tests_to_generate=500000):
     """Creates 100 random unit tests for amex credit card numbers"""
 
     for i in range(tests_to_generate):
