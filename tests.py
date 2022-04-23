@@ -100,7 +100,7 @@ def gen_credit_num(length, prefix, checks, range=None):
             length += 1
 
     # Create a range of values
-    min_val = 10 ** length - 1
+    min_val = 10 ** (length - 1)
     max_val = (min_val * 10)
 
     # Adds prefix and string of random numbers in the range
@@ -122,7 +122,7 @@ def generate_testcases_visa(tests_to_generate=1000):
         # List of edge case prefix
         prefixes = [3, 4, 5]
         # List of edge case lengths
-        lengths = [12, 13, 14]
+        lengths = [13, 14, 15]
 
         # Randomly picks prefix and length
         prefix = random.choice(prefixes)
@@ -165,6 +165,8 @@ def generate_testcases_mc(tests_to_generate=1000):
         # Set expected result based on specification for MC
         if (51 >= prefix >= 55 or 2221 >= prefix >= 2720) and length == 13 and check_sum == 1:
             expected = True
+            if len(prefix) == 4:
+                length = length - 2
 
         # Generate password
         pwd = gen_credit_num(length, str(prefix), check_sum)
