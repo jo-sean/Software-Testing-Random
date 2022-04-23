@@ -100,8 +100,8 @@ def gen_credit_num(length, prefix, checks, range=None):
             length += 1
 
     # Create a range of values
-    min_val = 10 ** length
-    max_val = (min_val * 10) - 1
+    min_val = 10 ** length - 1
+    max_val = (min_val * 10)
 
     # Adds prefix and string of random numbers in the range
     cred_num = prefix + str(random.randint(min_val, max_val))
@@ -122,7 +122,7 @@ def generate_testcases_visa(tests_to_generate=1000):
         # List of edge case prefix
         prefixes = [3, 4, 5]
         # List of edge case lengths
-        lengths = [0, 12, 13, 14]
+        lengths = [12, 13, 14]
 
         # Randomly picks prefix and length
         prefix = random.choice(prefixes)
