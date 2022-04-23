@@ -84,17 +84,6 @@ class TestCase(unittest.TestCase):
     pass
 
 
-def build_test_func(expected, test_case, func_under_test, message):
-    """Unittest to find 6 bugs in the credit_card_validator func"""
-
-    func_under_test(test_case)
-
-    # def test(self):
-    # result = func_under_test(test_case)
-    # self.assertEqual(expected, result, message.format(test_case, expected, result))
-    # return test
-
-
 def gen_credit_num(length, prefix, check_sum):
     # If not doing check, increments length to account for lack of new digit
     if check_sum == 0:
@@ -119,7 +108,6 @@ def generate_testcases_visa(tests_to_generate=50000):
     """Creates 100 random unit tests for visa credit card numbers"""
 
     for i in range(tests_to_generate):
-        expected = False
 
         # List of edge case prefix
         prefix = 4
@@ -132,25 +120,17 @@ def generate_testcases_visa(tests_to_generate=50000):
         # 50% chance of generating check_sum or not
         check_sum = random.randint(0, 1)
 
-        # Set expected result based on specification for Visa
-        if check_sum == 1 and length == 14:
-            expected = True
-
         # Generate credit card number
         pwd = gen_credit_num(length, str(prefix), check_sum)
 
-        # Build test function
-        message = 'Test case: {}, Expected: {}, Result: {}'
-        build_test_func(expected, pwd, credit_card_validator, message)
-        # new_test = build_test_func(expected, pwd, credit_card_validator, message)
-        # setattr(TestCase, 'test_{}'.format(pwd), new_test)
+        credit_card_validator(pwd)
+
 
 
 def generate_testcases_mc_1(tests_to_generate=50000):
     """Creates 100 random unit tests for mastercard credit card numbers"""
 
     for i in range(tests_to_generate):
-        expected = True
 
         # List of edge case prefix
         prefixes = [2220, 2221, 2222, 2719, 2720, 2721]
@@ -164,25 +144,16 @@ def generate_testcases_mc_1(tests_to_generate=50000):
         # 50% chance of generating check_sum or not
         check_sum = random.randint(0, 1)
 
-        # Set expected result based on specification for MC
-        if 51 >= prefix >= 55 and length == 13 and check_sum == 1:
-            expected = True
-
         # Generate password
         pwd = gen_credit_num(length, str(prefix), check_sum)
 
-        # Build test function
-        message = 'Test case: {}, Expected: {}, Result: {}'
-        build_test_func(expected, pwd, credit_card_validator, message)
-        # new_test = build_test_func(expected, pwd, credit_card_validator, message)
-        # setattr(TestCase, 'test_{}'.format(pwd), new_test)
+        credit_card_validator(pwd)
 
 
 def generate_testcases_mc_2(tests_to_generate=50000):
     """Creates 100 random unit tests for mastercard credit card numbers"""
 
     for i in range(tests_to_generate):
-        expected = True
 
         # List of edge case prefix
         prefixes = [2220, 2221, 2222, 2719, 2720, 2721]
@@ -203,18 +174,13 @@ def generate_testcases_mc_2(tests_to_generate=50000):
         # Generate password
         pwd = gen_credit_num(length, str(prefix), check_sum)
 
-        # Build test function
-        message = 'Test case: {}, Expected: {}, Result: {}'
-        build_test_func(expected, pwd, credit_card_validator, message)
-        # new_test = build_test_func(expected, pwd, credit_card_validator, message)
-        # setattr(TestCase, 'test_{}'.format(pwd), new_test)
+        credit_card_validator(pwd)
 
 
 def generate_testcases_amex(tests_to_generate=50000):
     """Creates 100 random unit tests for amex credit card numbers"""
 
     for i in range(tests_to_generate):
-        expected = True
 
         # List of edge case prefix
         prefixes = [33, 34, 35, 36, 37, 38]
@@ -235,11 +201,7 @@ def generate_testcases_amex(tests_to_generate=50000):
         # Generate password
         pwd = gen_credit_num(length, str(prefix), check_sum)
 
-        # Build test function
-        message = 'Test case: {}, Expected: {}, Result: {}'
-        build_test_func(expected, pwd, credit_card_validator, message)
-        # new_test = build_test_func(expected, pwd, credit_card_validator, message)
-        # setattr(TestCase, 'test_{}'.format(pwd), new_test)
+        credit_card_validator(pwd)
 
 
 if __name__ == '__main__':
