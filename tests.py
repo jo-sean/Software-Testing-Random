@@ -48,7 +48,7 @@ def generate_testcases_mc_1(tests_to_generate=200000):
         prefix = str(random.choice(prefixes))
         length = random.choice(lengths)
 
-        min_val = (40 ** length)
+        min_val = (int(prefix) ** length)
         max_val = (min_val * 10) - 1
 
         prefix_num = prefix + str(random.randint(min_val, max_val))
@@ -70,7 +70,7 @@ def generate_testcases_mc_2(tests_to_generate=200000):
         prefix = str(random.choice(prefixes))
         length = random.choice(lengths)
 
-        min_val = (40 ** length)
+        min_val = (int(prefix) ** length)
         max_val = (min_val * 10) - 1
 
         prefix_num = prefix + str(random.randint(min_val, max_val))
@@ -92,7 +92,7 @@ def generate_testcases_amex(tests_to_generate=200000):
         prefix = str(random.choice(prefixes))
         length = random.choice(lengths)
 
-        min_val = (40 ** length)
+        min_val = (int(prefix) ** length)
         max_val = (min_val * 10) - 1
 
         prefix_num = prefix + str(random.randint(min_val, max_val))
