@@ -163,7 +163,7 @@ def generate_testcases_mc_2(tests_to_generate=100000):
         # List of edge case prefix
         prefixes = [2220, 2221, 2222, 2719, 2720, 2721]
         # List of edge case lengths
-        lengths = [12, 13, 14]
+        lengths = [10, 11, 12]
 
         # Randomly picks prefix and length
         prefix = random.choice(prefixes)
