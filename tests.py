@@ -93,15 +93,15 @@ def build_test_func(expected, test_case, func_under_test, message):
     return test
 
 
-def gen_credit_num(length, prefix, checks, range=None):
+def gen_credit_num(length, prefix, checks):
     # If not doing check, increments length to account for lack of new digit
     if checks == 0:
         if length > 0:
             length += 1
 
     # Create a range of values
-    min_val = 10 ** (length - 1)
-    max_val = (min_val * 10)
+    min_val = (10 ** length)
+    max_val = (min_val*10) - 1
 
     # Adds prefix and string of random numbers in the range
     cred_num = prefix + str(random.randint(min_val, max_val))
